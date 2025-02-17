@@ -55,7 +55,7 @@ fig2 = px.histogram(
 )
 st.plotly_chart(fig2)
 
-data = {
+data = {'
     'island': island,
     'bill_length_mm': bill_length_mm,
     'bill_depth_mm': bill_depth_mm,
@@ -64,4 +64,19 @@ data = {
     'sex': gender
 }
 input_df = pd.DataFrame(data, index=[0])
-input_penguins = pd.concat([input_df, X_raw], axis=0)
+input_penguins = pd.concat([input_df, X_row], axis=0)
+
+with st.expander("input_features"):
+  st.dataframe(input_df)
+  st.dataframe(input_penguins)
+encode = ['island', 'sex']
+df_penguins = pd.get_dummies(input_penguins, prefix=encode)
+X = df_penguins[1:]
+input_row = df_penguins[:1]
+target_mapper = {'Adelie':0, 'Gentoo':2, 'Chinstrap':1}
+def target_encode(val):
+  return target_mapper[val]
+  y = y_row.apply(target_encode)
+with st.expander("data preparation"):
+  st.dataframe(input_row)
+  st.write(y)
