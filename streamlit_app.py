@@ -26,7 +26,8 @@ st.subheader("data_vis")
 fig  = px.scatter(
   df,
   x = 'bill_length_mm',
-  y = 'bill_depth_mm')
+  y = 'bill_depth_mm',
+  color='island')
 st.plotly_chart(fig)
 fig2 = px.histogram(
   df,
