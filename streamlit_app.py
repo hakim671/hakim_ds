@@ -55,7 +55,7 @@ fig2 = px.histogram(
 )
 st.plotly_chart(fig2)
 
-data = {'
+data = {
     'island': island,
     'bill_length_mm': bill_length_mm,
     'bill_depth_mm': bill_depth_mm,
