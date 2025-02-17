@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sklearn.ensemble import RandomForestClassifier
+import numpy as np
 st.title('🎈 App Hakim')
 
 st.write('Hello world!')
