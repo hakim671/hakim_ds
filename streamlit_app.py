@@ -28,3 +28,8 @@ fig  = px.scatter(
   x = 'bill_length_mm',
   y = 'bill_depth_mm')
 st.plotly_chart(fig)
+fig2 = px.histogram(
+  df,
+  x='body_mass_g',
+  nbins=30)
+st.plotly_chart(fig2)
