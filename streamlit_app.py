@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from sklern.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 st.title('🎈 App Hakim')
 
 st.write('Hello world!')
