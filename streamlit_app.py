@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 st.title('🎈 App Hakim')
 
 st.write('Hello world!')
@@ -21,3 +22,9 @@ with st.sidebar:
   flipper_length_mm = st.slider("flipper_length_mm", 32.1, 59.6, 44.5)
   body_mass_g = st.slider("body_mass_g", 32.1, 59.6, 44.5)
   gender = st.selectbox("gender", ("female", "male"))
+st.subheader("data_vis")
+fig  = px.scatter(
+  df,
+  x = 'bill_length_mm',
+  y = 'bill_depth_mm')
+st.plotly_chart(fig)
