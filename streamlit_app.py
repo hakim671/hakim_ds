@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from sklern.ensemble import RandomForestClassifier
 st.title('🎈 App Hakim')
 
 st.write('Hello world!')
@@ -80,3 +81,40 @@ y = y_row.apply(target_encode)
 with st.expander("data preparation"):
   st.dataframe(input_row)
   st.write(y)
+base_rf = RandomForestClassifier(random_state=42)
+base_rf.fit(X, y)
+pred = base_rf.predict(input_row)
+pred_proba = base_rf.predict_proba(input_row)
+df_pred_proba = pd.DataFrame(pred_proba, columns=['Adelie', 'Chinstrap', 'Gentoo'])
+
+st.subheader('Predicted Species')
+st.dataframe(
+    df_pred_proba,
+    column_config={
+        'Adelie': st.column_config.ProgressColumn(
+            'Adelie',
+            format='%f',
+            width='medium',
+            min_value=0,
+            max_value=1
+        ),
+        'Chinstrap': st.column_config.ProgressColumn(
+            'Chinstrap',
+            format='%f',
+            width='medium',
+            min_value=0,
+            max_value=1
+        ),
+        'Gentoo': st.column_config.ProgressColumn(
+            'Gentoo',
+            format='%f',
+            width='medium',
+            min_value=0,
+            max_value=1
+        ),
+    },
+    hide_index=True
+)
+
+penguins_species = np.array(['Adelie', 'Chinstrap', 'Gentoo'])
+st.success(f"Predicted species: **{penguins_species[pred][0]}**")
